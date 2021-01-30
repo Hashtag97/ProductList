@@ -5,7 +5,7 @@ import Loading from "./loading"
 
 const Task = (event) => {
     const { setterState, setLoading, loading } = useContext(DataContext);    
-    const [ openDelet, setOpenDelet ] = useState(false)
+    const [ openDelete, setOpenDelete ] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -15,18 +15,9 @@ const Task = (event) => {
         }, 500);
     }, [])
 
-    const clouseModal = (bool) =>{
-        console.log(bool)
-        if(bool){
-            setOpenDelet(false)
-        }else{
-            setOpenDelet(true)
-        }
-        
-        
-    }
+    const closeModal = (bool) => setOpenDelete(!bool)
 
-    const DeletTask = (isOpen) =>{
+    const DeleteTask = (isOpen) =>{
         return(
             <>
             {isOpen.isOpen === true ?(
@@ -39,11 +30,11 @@ const Task = (event) => {
                                     <p className="text-center text-xs px-3 text-gray-400">This action cannot be undone</p>
                                     <hr className="mt-3"></hr>
                                 </div>
-                                <button className="row-span-1" onClick={()=>clouseModal(true)} >
+                                <button className="row-span-1" onClick={()=>closeModal(true)} >
                                         <p className="text-center text-red-500 py-3">Delete task</p>
                                 </button>
                             </div>
-                                <button className="mx-5 row-span-2 bg-white rounded-xl" onClick={()=>clouseModal(true)} >
+                                <button className="mx-5 row-span-2 bg-white rounded-xl" onClick={()=>closeModal(true)} >
                                     <p className="text-center py-4">Cancel</p>
                                 </button>
                         </div>
@@ -57,7 +48,7 @@ const Task = (event) => {
     if(loading === false){
         return(
             <div className="grid z-0 relative grid-flow-row auto-rows-max">
-                <DeletTask isOpen={openDelet}/>
+                <DeleteTask isOpen={openDelete}/>
                 <div className="grid grid-rows-1 ">
                     <div className="grid grid-cols-12 row-span-1 py-4">
                         <button className="col-span-1" onClick={()=>{
@@ -111,7 +102,7 @@ const Task = (event) => {
                         </div>
                     </div>
                         <div className="grid grid-cols-10 row-span-1 ">
-                        <button className="bg-gray-200 rounded-md col-span-4 h-10" onClick={()=>clouseModal(false)}>
+                        <button className="bg-gray-200 rounded-md col-span-4 h-10" onClick={()=>closeModal(false)}>
                             <p className="text-center py-1.5">Delete task</p>
                         </button>  
                         </div>  
